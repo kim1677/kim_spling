@@ -50,7 +50,7 @@ public class MainController {
 		return "member/signUp";
 	}
 	
-//	form 데이터 받아오는 방법 1
+//	form 데이터 받아오는 방법 1(로그인 할때 유용)
 //	@PostMapping("/signUp")
 //	public String signUpSave(@RequestParam("id") String id, @RequestParam("pw") String pw, 
 //							@RequestParam("tel") String tel, @RequestParam("birth") String birth) {

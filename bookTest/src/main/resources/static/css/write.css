@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+#wrap{
+	width:400px;
+	margin:0 auto;
+}
+#enrollCount{padding:15px;}
+#formWrap{
+	width:100%;
+	padding:10px;
+}
+
+.inputfield{
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+	padding:7px 0;
+}
+.inputfield input{
+	width:300px;
+	height:35px;
+	padding:10px;
+	border-radius: 10px;
+}
+#bt{
+	width:80px;
+	border:0;
+	background:#68cdce;
+	display: block;
+	padding:10px 0;
+	border-radius: 10px;
+	color:#fff; font-weight:700; font-size:20px;
+	cursor:pointer;
+}
