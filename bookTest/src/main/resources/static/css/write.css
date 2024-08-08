@@ -15,23 +15,25 @@
 	padding:10px;
 }
 
-.inputfield{
-	display:flex;
+.inputField{
+	display:flex; 
 	align-items:center;
 	justify-content: space-between;
-	padding:7px 0;
+	padding:7px 0 ;
 }
-.inputfield input{
+.inputField input{
 	width:300px;
 	height:35px;
 	padding:10px;
 	border-radius: 10px;
 }
+
 #bt{
-	width:80px;
+	width:80%;	
 	border:0;
 	background:#68cdce;
-	display: block;
+	display:block;
+	margin:0 auto;
 	padding:10px 0;
 	border-radius: 10px;
 	color:#fff; font-weight:700; font-size:20px;
