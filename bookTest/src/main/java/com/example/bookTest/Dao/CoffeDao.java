@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.bookTest.Dto.BookDto;
 import com.example.bookTest.Dto.CoffeDto;
 
 @Repository
@@ -20,14 +21,37 @@ public class CoffeDao {
 		this.jt = jdbc;
 	}
 	
+	public void delete(int bid) {
+		String sql="delete from coffe where coffe_id=?";
+		jt.update(sql, bid);
+	}
+	
+	public CoffeDto findId(int cid) {
+		String sql="select * from coffe where coffe_id=?";
+		CoffeDto dto = jt.queryForObject(sql, 
+			new RowMapper<CoffeDto>() {
+			@Override
+			public CoffeDto mapRow(ResultSet rs, int rowNum) throws SQLException{
+				CoffeDto coffeDto = new CoffeDto();
+				coffeDto.setItemName(rs.getString("item_name"));
+				coffeDto.setPrice(rs.getInt("price"));
+				coffeDto.setDecaffein(rs.getInt("decaffein"));
+				coffeDto.setCoffeId(rs.getInt("coffe_id"));
+				return coffeDto;
+			}
+		} ,cid);
+		
+		return dto;
+	}
+	
 	public List<CoffeDto> select(){
 		String sql="select * from coffe";
 		List<CoffeDto> list = jt.query(sql, new CoffeDtoRowMapper() );
 		return list;
 	}
 	
-	
-	public void save(CoffeDto coffeDto) {	// 커피정보 데이터베이스에 저장
+	// 커피정보 데이터베이스에 저장
+	public void save(CoffeDto coffeDto) {
 		String  sql="insert into coffe(item_name, price, decaffein) values(?,?,?)";
 		jt.update(sql, coffeDto.getItemName(), coffeDto.getPrice(), coffeDto.getDecaffein() );
 	}
@@ -39,7 +63,7 @@ public class CoffeDao {
 			coffeDto.setItemName(rs.getString("item_name"));
 			coffeDto.setPrice(rs.getInt("price"));
 			coffeDto.setDecaffein(rs.getInt("decaffein"));
-			coffeDto.setCoffeId(rs.getInt("coffe_Id"));
+			coffeDto.setCoffeId(rs.getInt("coffe_id"));
 			return coffeDto;
 		}
 	}

@@ -23,7 +23,9 @@
 			<ul id="bookList">
 				<c:forEach var="row" items="${list}">
 					<li class="blist">
-						<span class="title">${row.bookTitle}</span>
+						<span class="title">
+							<a href="/book/view?id=${row.bookId}">${row.bookTitle}</a>
+						</span>
 						<span class="auth">${row.bookAuthor}</span>
 						<span class="bookcod">${row.bookId}</span>
 						<span class="category">${row.publisher}</span>

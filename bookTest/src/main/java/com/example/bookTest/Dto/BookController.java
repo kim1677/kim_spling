@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.bookTest.Dao.BookDAO;
@@ -48,5 +49,31 @@ public class BookController {
 		
 		return "index";
 	}
+	
+	// book_id 값이 없다면 null로 반환
+	@GetMapping("/book/view")
+	public ModelAndView view(@RequestParam(value="id", required=false, defaultValue="0") int id) {
+		
+		BookDto data = bookService.getBook(id);
+		if(data == null) data = new BookDto();	// getBook메서드의 반환값으로 null 저장된다면 view.jsp에서 변수의 값이 null이기 때문에 get 메서드 호출이 안되어 오류가 발생한다.
+												// 오류가 발생되지 않게 하기위해 빈 값이 있는 객체 할당
+		return new ModelAndView("book/view").addObject("book", data);
+		
+	}
+	
+	@GetMapping("/book/delete")
+	public String bookRemove(@RequestParam("id") int bid) {
+		bookService.remove(bid);
+		return "redirect:/";
+//		return "<script> alert('삭제되었습니다.'); location.href='/';</script>";
+	}
+	
+	@GetMapping("/book/update")
+	public String bookupdate(@ModelAttribute BookDto bookDto, @RequestParam("id") int id) {
+		bookDto.setBookId(id);
+		bookService.update(bookDto);
+		return "redirect:/book/view?id="+id;	// 수정 도서의 상세페이지 이동
+	}
+	
 	
 }
