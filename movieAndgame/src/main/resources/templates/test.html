@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<style>.aaa{color:red;}</style>
+	<h1> thymeleaf 엔진 적용 페이지 </h1>
+	<div th:text="${name}"></div>
+	<div th:class="aaa">이순신</div>
+	
+	<table th:object=${member}>
+		<tr>	<!-- thymeleaf에서 ${}는 변수의 값 출력시 사용 -->
+		<!-- *{} th:object로 객체를 지정한 경우 객체의 필드명(인스턴스 변수의 get메서드) 표현방식 -->
+			<td>이름 : </td><td th:text="*{name}"></td>
+		</tr>
+		<tr>
+			<td>연락처 : </td><td th:text=*{tel}></td>
+		</tr>
+		<tr>
+			<td>나이 : </td><td th:text=*{age}></td>
+		</tr>
+		<tr>
+			<td>이메일 : </td><td th:text=*{email}></td>
+		</tr>
+	</table>
+	
+	<form th:object="${member}">
+		<input th:field="*{name}"><br>
+		<input th:field="*{age}"><br>
+		<input th:field="*{tel}"><br>
+		<input th:field="*{email}"><br>
+	</form>
+	
+	<!-- for(String a : animal){
+		 	반복할 내용
+		 }		 
+	 -->
+	<ul>
+		<li th:each="a : ${animal}" th:text=${a}></li>
+	</ul>
+	
+	<div th:if="${member.age>20}">
+		성인입니다.
+	</div>
+	<div th:unless="${member.age>20}">	<!-- else와 같은 것 th:unless 는 th:if와 같이 사용해야함 -->
+		청소년입니다.
+	</div>
+	
+	<h1 th:text="${member.age>=20? '성인' : '미성년자'}"></h1>
+	
+	<!-- switch(11){
+			case 3:	내용 break;
+			case 5:	내용 break;
+			case 11: 내용 break;
+			case 20: 내용 break;
+		}
+	 -->
+	
+	<div th:switch="${name}">
+		<p th:case="김유신">신라장수</p>
+		<p th:case="최영">고려장수</p>
+		<p th:case="이순신">조선장수</p>
+		<p th:case="계백">백제장수</p>
+		<p>고구려장수</p>
+	</div>
+	
+	<div th:text="${tag}"></div>
+	<div th:utext="${tag}"></div>
+	
+</body>
+</html>
+
+<!-- 
+thymeleaf 문법과 표현식
+
+${} : 변수 - Model, 또는 ModelAndView로 지정한 name만 사용가능
+*{} : 선택변수 - member라는 객체에 age,tel 변수를 출력하려면 member.age, membertel 이라고 해야 하지만 아래처럼 작성해도 표현된다. 
+			   <div th:object="${member}">
+			   	<div th:text="*{age}">
+			   </dev>
+			   
+@{} : url 링크 표현식 - <a href="/test"> 테스트 페이지 </a>
+					 <a th:href="@{/test}"> 테스트 페이지 </a>
+
+#{} : 메시지, properties의 값을 ㅍ현할때 사용
+
+반복문 th:each
+	 thymeleaf의 반복문, 자바의 for(int num : number)의 동작이다.
+	 
+	 items에 배열 또는 컬렉션프레임워크 객체가 담겨져 있다면
+	 <div>
+	 	<b th:each="data : ${item}" th:text="${data}"></b>
+	 </div>
+	 이와 같은 방법으로 사용해야 한다.
+	 반복할 태그에 직접 each를 작성해야 한다.
+	 
+조건문 th:if, th:unless, th:switch, 삼항연산자(조건연산자)
+	
+	num변수의 값에 10이 저장되었다면
+	<p th:if="${num > 5}"> 5보다 크다 </P>
+	<p th:unless="${num > 5}"> 5보다 작다 </P>
+	
+	th:if는 조건식이 참일경우에 실행, th:unless는 조건식이 거짓일경우에 실행
+	
+출력 - th:text="${변수명}", th:utext="${변수}", th:value="${변수}"
+	  
+	  th:value는 input태그, select태그에 사용된다.
+	  th:utext는 untext 텍스트가 아닌 html태그로 동작할 수 있다.
+	  	th:text,, th:utext → innerHTML, innerText 차이
+	  	
+변수 - 변수를 생성하고 값저장 방법 : th:with
+	  th:with를 통해 생성된 변수는 사용범위가 제한적이다.
+	  생성된 태그의 하위 태그에서만 가능하다.
+	  
+	  <div th:with="num=100">
+	  	<span th:text="${num}"></span>
+	  </div>
+	  <p th:text="${num}"></p>
+
+	  타임리프 내부 주석 <!--/*	*/-->
+	  	<!-- html 태그 주석으로 걸어버리면 개발자도구에 노출됨!  -->
+-->
+
+<div th:with="num=100">
+	<span th:text="${num}"></span>
+</div>
+<p th:text="${num}"></p>
+<!--/*  */-->

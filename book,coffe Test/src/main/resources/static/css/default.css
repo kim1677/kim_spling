@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/* default.css  */
+
+*{
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+}
+ul{ list-style: none;}
+
+#wrap{
+	width:800px;
+	margin:0 auto;
+}
+#wrap h2{ padding:40px 0;}
+#mainTitle{
+	position:relative;
+	width:100%;
+	padding:10px 0;
+}
+#enroll{
+	position:absolute;
+	right:0;
+	top:10px;
+	text-decoration:none;
+	color:inherit;
+}
+#enroll:hover{
+	font-weight:800;
+	color:blue;
+}
+#bookListWrap{
+	padding:15px;
+}
+#bookList{
+	width:100%;
+}
+#bookList .blist{
+	display:flex;
+	align-items:center;
+	padding:15px 0;
+	border-bottom:1px solid #ccc;
+}
+.title{ width:40%;}
+.auth{width:20%;}
+.bookCode{width:20%;}
+.category{width:20%;}
+.itemName{width:50%;}
+.price{width:25%;}
+.decaffein{width:25%;}

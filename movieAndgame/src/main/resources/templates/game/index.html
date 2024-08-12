@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게임톡톡</title>
+
+<!-- jquery CDN-->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/css/game.css">
+<script src="/js/default.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div id="nav">
+				<ul id="menuList"></ul>
+				<div id="userAlogo">
+					<div class="userbox">
+						<span class="loginLink">
+							<a th:href="@{/game/login}">로그인</a>
+						</span>
+						<span class="userServic">고객센터</span>
+					</div>
+					<div class="logo"></div>
+				</div>
+			</div>
+		</div>
+		<div id="main">
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+</html>

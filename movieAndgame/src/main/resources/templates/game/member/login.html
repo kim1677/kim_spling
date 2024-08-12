@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+
+<!-- jquery CDN-->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/css/default.css">
+<script src="/js/default.js"></script>
+
+</head>
+<body>
+	<div id="main">
+			<form method="post" th:action="@{/game/signIn}" th:object="${member}">
+				<div id="formData">
+					<div class="inputField">
+						<input type="text" th:field="*{email}">
+						<label th:for="email">이메일</label>
+					</div>
+					<div class="inputField">
+						<input type="password" th:field="*{password}">
+						<label th:for="password">비밀번호</label>
+					</div>
+					<div class="inputField">
+						<input type="text" th:field="*{username}">
+						<label th:for="username">닉네임</label>
+					</div>
+					<div class="loginBt">
+						<button>LOGIN</button>
+					</div>
+				</div>
+			</form>
+						
+		</div>
+</body>
+</html>
