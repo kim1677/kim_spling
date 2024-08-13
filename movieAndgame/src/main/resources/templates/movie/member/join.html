@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout"
+	layout:decorate="~{movie/default}">
+	
+<head>
+	<title layout:fragment="title">영화 회원가입</title>
+	
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/css/movie_join.css">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script src="/js/movie_join.js"></script>
+	</th:block>
+</head>
+
+	<div layout:fragment="main" id="main">
+		<form method="post" action="/movie/signUp" th:object="${movieMember}">
+			<div id="formData">
+				<div class="inputField">
+					<input type="email" th:field="*{email}">
+					<label th:for="email">이메일</label>
+				</div>
+				<div class="inputField">
+					<input type="password" th:field="*{password}">
+					<label th:for="password">비밀번호</label>
+				</div>
+				<div class="inputField">
+					<input type="password" id="chk">
+					<label th:for="chk">비밀번호 확인</label>
+				</div>
+				<div class="inputField">
+					<input type="text" th:field="*{name}">
+					<label th:for="name">이름</label>
+				</div>
+				<div class="inputField">
+					<input type="text" th:field="*{tel}">
+					<label th:for="tel">연락처</label>
+				</div>
+				<div class="inputField">
+					<b>생년 월일</b>
+					<select th:field="*{birthYear}"></select>
+					<label th:for="birthYear">년</label>
+					<select th:field="*{birthMonth}"></select>
+					<label th:for="birthMonth">월</label>
+				</div>
+				
+				<button id="joinBt">SignUp</button>
+			</div>
+		</form>
+	</div>
+	
+</html>

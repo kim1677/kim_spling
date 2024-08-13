@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title layout:fragment="title">Insert title here</title>
+
+<!-- jquery CDN-->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/css/game.css">
+<script src="/js/game.js"></script>
+
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="script"></th:block>
+
+</head>
+<body>
+
+	<div id="wrap">
+		<th:block th:replace="game/header :: head"></th:block>
+		<th:block layout:fragment="main"></th:block>
+		<th:block th:insert="game/footer :: foot"></th:block>
+	</div>
+
+</body>
+</html>

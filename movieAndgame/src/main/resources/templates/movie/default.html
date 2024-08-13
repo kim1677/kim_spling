@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title layout:fragment="title">Insert title here</title>
+
+<!-- jquery CDN-->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/css/default.css">
+<script src="/js/default.js"></script>
+
+<!-- 템플릿 페이지에서 사용하는 css, js 삽입 영역() -->
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="script"></th:block>
+
+</head>
+<body>
+
+	<div id="wrap">
+		<th:block th:replace="movie/header :: headerFrag"></th:block>
+		<th:block layout:fragment="main"></th:block>
+		<th:block th:insert="movie/footer :: footFrag"></th:block>
+	</div>
+
+</body>
+</html>
+
+<!-- 
+
+	thymeleaf의 layout 사용
+	
+	- 기본 레이아웃 페이지와 여러 템플릿 페이지로 구성된다.
+	- 기본 레이아웃 페이지는 <head>, <body> html 기본 요소로 구성
+	- 기본 레이아웃 페이지가 사용자에게 제공되는 실제 페이지이며 기본 세팅을 해야한다.
+	- 기몬 레이아웃 페이지에서 템플릿 페이지를 적용될 수 있는 영역을 설정해야 한다.
+
+-->

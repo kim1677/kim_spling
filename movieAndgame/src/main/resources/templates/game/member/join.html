@@ -2,13 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.thymeleaf/layout"
 	layout:decorate="~{game/default}">
-
+	
 <head>
-	<title layout:fragment="title">game에 오신 것을 환영합니다.</title>
+	<title layout:fragment="title">회원가입</title>
+	
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script">
+		<script src="/js/join.js"></script>
+	</th:block>
 </head>
 
 	<div layout:fragment="main" id="main">
-		index.html game main page
+
 	</div>
 	
 </html>
