@@ -7,13 +7,36 @@
 	<title layout:fragment="title">회원가입</title>
 	
 	<th:block layout:fragment="css"></th:block>
-	<th:block layout:fragment="script">
-		<script src="/js/join.js"></script>
-	</th:block>
+	<th:block layout:fragment="script"></th:block>
 </head>
 
 	<div layout:fragment="main" id="main">
-
+		<form method="post" action="/game/signUp" th:object="${gameMember}">
+			<div id="formData">
+				<div class="inputField">
+					<input type="email" th:field="*{email}">
+					<label th:for="email">이메일</label>
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError"></p>
+				</div>
+				<div class="inputField">
+					<input type="password" th:field="*{password}">
+					<label th:for="password">비밀번호
+					</label>
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError"></p>
+				</div>
+				<div class="inputField">
+					<input type="password" id="chk">
+					<label th:for="chk">비밀번호 확인
+					</label>
+				</div>
+				<div class="inputField">
+					<input type="text" th:field="*{username}">
+					<label th:for="username">이름</label>
+				</div>
+				
+				<button id="joinBt">가입</button>
+			</div>
+		</form>
 	</div>
 	
 </html>

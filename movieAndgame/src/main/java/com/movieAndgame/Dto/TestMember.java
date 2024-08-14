@@ -1,4 +1,4 @@
-package com.movieAndgame.control.Dto;
+package com.movieAndgame.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
