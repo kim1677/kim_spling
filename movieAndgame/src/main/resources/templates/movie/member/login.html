@@ -5,6 +5,17 @@
 	
 <head>
 	<title layout:fragment="title">로그인</title>
+
+	<th:block layout:fragment="script">
+		<script src="/js/movie_login.js"></script>
+	</th:block>
+	
+	<th:block th:if="${fail}">
+		<script th:inline="javascript">
+			alert("아이디 또는 비밀번호가 잘못 되었습니다.");
+		</script>
+	</th:block>
+	
 </head>
 <body>
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout"
+	layout:decorate="~{game/default}">
+	
+<head>
+	<title layout:fragment="title">리뷰작성</title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2>리뷰 작성</h2>	
+		<form method="get" action="/gameMenu/write" th:object="${gameReviewDto}">
+			작성자 : <input type="text" th:field="*{writer}" readonly="readonly"><br>	
+			제목 : <input type="text" th:field="*{title}"><br>
+				<p th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}"></p>
+			모바일게임 이름 : <input type="text" th:field="*{game_name}"><br>
+				<p th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}"></p>
+			공략내용 : <textarea th:field="*{target_post}"></textarea>
+				<p th:if="${#fields.hasErrors('*{target_post}')}" th:errors="*{target_post}"></p>			
+			<button>작성</button>
+		</form>
+	</div>
+
+</html>

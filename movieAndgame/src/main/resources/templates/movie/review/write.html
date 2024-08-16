@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout"
+	layout:decorate="~{movie/default}">
+	
+<head>
+	<title layout:fragment="title">리뷰작성</title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2>리뷰 작성</h2>	
+		<form method="get" action="/movieMenu/write" th:object="${movieReviewDto}">
+			작성자 : <input type="text" th:field="*{writer}" readonly="readonly"><br>	
+			제목 : <input type="text" th:field="*{title}"><br>
+				<p th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}"></p>
+			내용 : <textarea th:field="*{content}"></textarea>
+				<p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>			
+			<button>작성</button>
+		</form>
+	</div>
+</html>
