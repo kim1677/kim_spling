@@ -77,4 +77,5 @@ public class GameController {
 		session.removeAttribute("user");
 		return "redirect:/game/index";
 	}
+	
 }

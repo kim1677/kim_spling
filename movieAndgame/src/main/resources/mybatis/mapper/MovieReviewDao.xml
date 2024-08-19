@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.movieAndgame.Dao.MovieReviewDaoImpl">
-
+	<select id="findById" resultType="com.movieAndgame.Dto.MovieReviewDto">
+		select * from movie_review where review_id=#{id}
+	</select>
+	
+	<!-- 리뷰(후기) 전체 가져오기 : 목록 출력을 위해 -->
+	<select id="findAll" resultType="com.movieAndgame.Dto.MovieReviewDto">
+		select * from movie_review order by write_date desc
+	</select>
+	
 	<insert id="reviewSave" parameterType="com.movieAndgame.Dto.MovieReviewDto">
 		insert into movie_review(writer, title, content, write_date)
 		values

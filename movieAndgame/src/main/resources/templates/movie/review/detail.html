@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.thymeleaf/layout"
+	layout:decorate="~{movie/default}">
+	
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+
+</head>
+	<div layout:fragment="main" id="main">
+		<table th:object="${movieReviewDto}">
+			<tr>
+				<td>번호</td>
+				<td th:text="*{review_id}"></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td th:text="*{writer}"></td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td th:text="*{title}"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td th:text="*{content}"></td>
+			</tr>
+			<tr>
+				<td>작성일</td>
+				<td th:text="*{write_date}"></td>
+			</tr>
+		</table>
+	</div>
+</html>

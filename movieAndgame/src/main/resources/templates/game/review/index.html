@@ -13,12 +13,26 @@
 		<div id="section_top">
 			<h3>모바일 게임 공략 글 작성 페이지입니다.</h3>
 			<p> 
-				<a href="/gameMenu/reviewWrite">리뷰 작성</a>
+				<a href="/gameReview/write">리뷰 작성</a>
 			</p>
 		</div>
 		
 		<div id="section_middle">
 			<table id="reviewList">
+				<tr>
+					<th>번호</th>
+					<th>게임</th>
+					<th>작성일</th>
+				</tr>
+				
+				<tr th:each="row : ${reviewList}">
+					<td>
+						<a th:href="'/gameReview/view/'+${row.post_id}" th:text="${row.post_id}"></a>
+					</td>
+					<td th:text="${row.game_name}"></td>
+					<td th:text="${#temporals.format(row.write_date,'yyyy-MM-dd')}"></td>
+				</tr>
+				
 			</table>
 		</div>
 		

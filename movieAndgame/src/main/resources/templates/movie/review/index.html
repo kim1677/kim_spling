@@ -19,6 +19,30 @@
 		
 		<div id="section_middle">
 			<table id="reviewList">
+				<tr>
+					<th class=num>번호</th>
+					<th class=title>제목</th>
+					<th class=date>작성일</th>
+				</tr>
+				
+				<!-- th:each="변수 : ${} -->
+				
+				<tr th:each="row : ${reviewList}">
+					<td class=num th:text="${row.review_id}"></td>
+					<td class=title>
+						<a th:href="@{'/movieMenu/view/'+${row.review_id}}" th:text="${row.title}"></a>
+					</td>
+					<td class=date th:text="${#temporals.format(row.write_date, 'yyyy-MM-dd HH:mm')}"></td>
+				</tr>
+				
+				<!-- 
+				thymeleaft 날짜 출력 
+				${#temporals.formatISO(변수명)} 
+				
+				${#dates.format(standardDate, 'yyyy-MM-dd HH:mm')}	→ 2024-08-19 10:31
+				${#temporals.format(변수명, 'yy-MM-dd)} 	→ 2024-08-19
+				-->
+				
 			</table>
 		</div>
 		

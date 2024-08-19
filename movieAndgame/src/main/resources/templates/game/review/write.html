@@ -10,14 +10,17 @@
 </head>
 	<div layout:fragment="main" id="main">
 		<h2>리뷰 작성</h2>	
-		<form method="get" action="/gameMenu/write" th:object="${gameReviewDto}">
+		<form method="post" action="/gameReview/write" th:object="${gameReviewDto}">
 			작성자 : <input type="text" th:field="*{writer}" readonly="readonly"><br>	
+			
 			제목 : <input type="text" th:field="*{title}"><br>
 				<p th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}"></p>
-			모바일게임 이름 : <input type="text" th:field="*{game_name}"><br>
+				
+			게임 : <input type="text" th:field="*{gamename}"><br>
 				<p th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}"></p>
-			공략내용 : <textarea th:field="*{target_post}"></textarea>
-				<p th:if="${#fields.hasErrors('*{target_post}')}" th:errors="*{target_post}"></p>			
+				
+			내용 : <textarea th:field="*{targetpost}"></textarea>
+				<p th:if="${#fields.hasErrors('*{targetpost}')}" th:errors="*{targetpost}"></p>			
 			<button>작성</button>
 		</form>
 	</div>
