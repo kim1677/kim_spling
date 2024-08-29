@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">	<!-- 템플릿 엔진 사용하기 위해서 넣는것 -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>첫 페이지 </h1>
+	
+	<div> <a href="info">내정보</a> </div>
+	
+	<!-- mainPage에 보여줄 데이터를 thymeleaf 를 사용해 addAttribute 값을 받아 전달    -->
+	<p th:text="${myName}"></p>
+	<p th:text="${myage}"></p>
+	<p th:text="${mybirth}"></p>
+	
+	<div>
+	<a href="/favorite">좋아하는것</a>
+	
+</body>
+</html>
