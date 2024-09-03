@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div th:fragment="header" id="header">
+		<div id="navTop">
+			<ul id="logo">
+				<div> 5조도서관로고 </div>
+				<li class="menu"> <a href="/library/"> 5조도서관 홈 </a> </li>
+			</ul>
+			<ul id="userBox">
+				<th:block th:if="${session.user!=null}">
+					<li class="menu" th:text="${#session.getAttribute('user').nick}"> 회원님! </li>
+					<li class="menu"> MyPage </li>
+					<li class="menu"> 로그아웃 </li>
+				</th:block>
+				<th:block th:if="${session.user==null}">
+					<li class="menu"> </li>
+					<li class="menu"> 로그인 </li>
+					<li class="menu"> 회원가입 </li>
+				</th:block>
+			</ul>
+		</div>
+		<div id="navBottom">
+			<ul id="menuList">
+				<li class="menu"> 정보 검색 </li>
+				<li class="menu"> 도서관 이용 </li>
+				<li class="menu"> 전자 정보원 </li>
+				<li class="menu"> 커뮤니티 </li>
+				<li class="menu"> 나의 도서관 </li>
+				<li class="menu"> 도서관 안내 </li>
+			</ul>
+		</div>
+	</div>
+</html>
