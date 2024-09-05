@@ -7,10 +7,11 @@
 </head>
 	<div layout:fragment="main" id="main">
 		<h2>리뷰 작성</h2>	
-		<form method="post" action="/bookindex" th:object="${BkDTO}">
+		<a href="/bookindex">목록으로 돌아가기</a>
+		<form method="post" action="/bookindex" th:object="${BkDTO}" enctype="multipart/form-data">
 			제목 : <input type="text" th:field="*{btitl}"><br>
-			이미지 : <input type="file" th:field="*{bimg}"><br>
-			<button>입력</button>
+			이미지 첨부 : <input type="file" th:field="*{bimg}"><br>
+			<button type="submit">입력</button>
 		</form>
 	</div>
 

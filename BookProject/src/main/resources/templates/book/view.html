@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/css/view.css">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script src="/js/view.js"></script>
+	</th:block>
 </head>
-<body>
-
-</body>
+	<div layout:fragment="main" id="main">
+		<h2> 도서 상세 페이지 </h2>
+		<a href="/bookindex">목록으로 돌아가기</a>
+		<table th:object="${bkDTO}">
+			<tr>
+				<td class="tdhead">책 제목</td>
+				<td class="data" th:text="*{btitl}"></td>
+			</tr>
+			<tr>
+				<td class="tdhead">표지</td>
+				<td class="imgdata"><img th:src="@{'/img/' + ${bkDTO.burl}}" alt="Book img"/></td>
+			</tr>
+		</table>
+	</div>
 </html>

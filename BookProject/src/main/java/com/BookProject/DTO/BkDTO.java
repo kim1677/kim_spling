@@ -1,5 +1,7 @@
 package com.BookProject.DTO;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +10,7 @@ import lombok.Setter;
 public class BkDTO {
 	private int bid;
 	private String btitl;
-	private String bimg;
+	private String burl;
 //	private String bsubt;
 //	private int bvolu;
 //	private String bwrit;
@@ -21,5 +23,6 @@ public class BkDTO {
 //	private String bsort;
 //	private String bcode;
 //	private String bcont;
+	private MultipartFile bimg;
 	
 }
