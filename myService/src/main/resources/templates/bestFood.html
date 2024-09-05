@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<p th:each="food : ${foodlist}">			<!-- list를 통해 받아옴 -->
+			<b th:text="${food.foodName}"></b>		<!-- DTO를 통해 받아옴 -->
+		</p>
+</body>
+</html>

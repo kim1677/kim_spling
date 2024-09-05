@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:each="pitcher : ${pitcherlist}">
+		<p th:text="${pitcher.name}"></p>
+		<p th:text="${'실점' + pitcher.lostpoint}"></p>
+		<p th:text="${'탈삼진' + pitcher.strikeOut}"></p>
+		<p th:text="${'평균자책점' + pitcher.avgEarnedRun}"></p>
+	</div>
+	
+</body>
+</html>
