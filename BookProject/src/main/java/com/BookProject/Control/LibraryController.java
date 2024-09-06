@@ -1,7 +1,9 @@
 package com.BookProject.Control;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class LibraryController {
 
     private final BkService bkService;
-
+    private static final String IMAGE_DIR = "C:/img/";
+    
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -60,6 +63,32 @@ public class LibraryController {
         bkService.saveBook(bkDTO);
         return "redirect:/bookindex";
     }
+    
+    @PostMapping("/write")
+    public String bookwrite(@ModelAttribute BkDTO bkDTO, Model model, 
+                            @RequestParam("bimg") MultipartFile bimg) {
+        if (!bimg.isEmpty()) {
+            try {
+                // 이미지를 지정된 디렉토리에 저장
+                String fileName = bimg.getOriginalFilename();
+                Path imagePath = Paths.get(IMAGE_DIR, fileName);
+                Files.createDirectories(imagePath.getParent());
+                bimg.transferTo(imagePath.toFile());
+
+                // DTO에 이미지 URL 설정 (파일명 사용)
+                bkDTO.setBurl(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 오류 처리 (예: 모델에 오류 메시지 추가)
+                model.addAttribute("errorMessage", "이미지 업로드에 실패했습니다. 다시 시도해 주세요.");
+                return "book/write"; // 오류 발생 시 다시 작성 페이지로 이동
+            }
+        }
+
+        // Service를 사용하여 DTO를 DAO로 넘김
+        bkService.saveBook(bkDTO);
+        return "redirect:/bookindex";
+    }
 
     @GetMapping("/view/{id}")
 	public String view(@PathVariable("id") int id, Model model){
@@ -67,25 +96,6 @@ public class LibraryController {
 		model.addAttribute("bkDTO",bkDTO);
 		return "book/view";
 	}
-    
-    @PostMapping("/write")
-	public String write(@ModelAttribute BkDTO bkDTO, Model model) {
-		MultipartFile bimg=bkDTO.getBimg();
-		if(bimg!=null&&!bimg.isEmpty()) {
-			try {
-				String fileName=bimg.getOriginalFilename();
-				String savePath="C:\\img\\"+fileName;
-				bimg.transferTo(new File(savePath));
-				bkDTO.setBurl("/img/"+fileName);
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-		bkService.saveBook(bkDTO);
-	
-    
-        return "redirect:/bookindex";
-    }
-    
+   
  
 }
