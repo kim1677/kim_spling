@@ -1,11 +1,8 @@
 package com.BookProject.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.BookProject.DAO.BkDAO;
 import com.BookProject.DTO.BkDTO;
@@ -32,7 +29,13 @@ public class BkService {
 		return bkDAO.findById(id);
 	}
 
+	public void delete(int bid) {
+		bkDAO.delete(bid);
+	}
 
+	public void update(BkDTO bkDTO) {
+		bkDAO.update(bkDTO);
+	}
     
     
 }

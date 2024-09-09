@@ -1,5 +1,6 @@
 package com.BookProject.Control;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -89,6 +90,31 @@ public class LibraryController {
         bkService.saveBook(bkDTO);
         return "redirect:/bookindex";
     }
+    
+    @PostMapping("/update")
+    public String update(@ModelAttribute BkDTO bkDTO, Model model, @RequestParam("bimg") MultipartFile bimg) {
+    	if (!bimg.isEmpty()) {
+            try {
+                // 이미지를 지정된 디렉토리에 저장
+                String fileName = bimg.getOriginalFilename();
+                Path imagePath = Paths.get(IMAGE_DIR, fileName);
+                Files.createDirectories(imagePath.getParent());
+                bimg.transferTo(imagePath.toFile());
+
+                // DTO에 이미지 URL 설정 (파일명 사용)
+                bkDTO.setBurl(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 오류 처리 (예: 모델에 오류 메시지 추가)
+                model.addAttribute("errorMessage", "이미지 업로드에 실패했습니다. 다시 시도해 주세요.");
+                return "book/write"; // 오류 발생 시 다시 작성 페이지로 이동
+            }
+        }
+    	
+        bkService.update(bkDTO);
+        return "redirect:/bookindex/" + bkDTO.getBid();
+    }
+
 
     @GetMapping("/view/{id}")
 	public String view(@PathVariable("id") int id, Model model){
@@ -96,6 +122,30 @@ public class LibraryController {
 		model.addAttribute("bkDTO",bkDTO);
 		return "book/view";
 	}
-   
+    
+    @GetMapping("/delete")
+    public String delete(@RequestParam("bid") int bid) {
+        bkService.delete(bid);
+        return "redirect:/bookindex";
+    }
+    
+//    @PostMapping("/update")
+//    public String update(@ModelAttribute BkDTO bkDTO, @RequestParam("bimg") MultipartFile file) {
+//        if (!file.isEmpty()) {
+//            String fileName = file.getOriginalFilename();
+//            String savePath = "C:/img/" + fileName;
+//            try {
+//                file.transferTo(new File(savePath));
+//                bkDTO.setBurl(savePath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                
+//            }
+//        }
+//        bkService.update(bkDTO);
+//        return "redirect:/bookindex/" + bkDTO.getBid();
+//    }
+//   
+    
  
 }

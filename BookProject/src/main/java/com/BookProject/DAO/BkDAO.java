@@ -32,18 +32,6 @@ public class BkDAO {
             BkDTO book = new BkDTO();
             book.setBid(rs.getInt("bid"));
             book.setBtitl(rs.getString("btitl"));
-//            book.setBsubt(rs.getString("bsubt"));
-//            book.setBvolu(rs.getInt("bvolu"));
-//            book.setBwrit(rs.getString("bwrit"));
-//            book.setBtran(rs.getString("btran"));
-//            book.setBkeyw(rs.getString("bkeyw"));
-//            book.setBpubl(rs.getString("bpubl"));
-//            book.setBpage(rs.getInt("bpage"));
-//            book.setBdate(rs.getString("bdate"));
-//            book.setBpric(rs.getInt("bpric"));
-//            book.setBsort(rs.getString("bsort"));
-//            book.setBcode(rs.getString("bcode"));
-//            book.setBcont(rs.getString("bcont"));
             book.setBurl(rs.getString("burl"));
             return book;
     	}
@@ -66,6 +54,15 @@ public class BkDAO {
     	BkDTO bkDTO=jt.queryForObject(sql, new BkDTORowMapper(),id);
     	return bkDTO;
     }
+    
+    public void delete(int bid) {
+		String sql = "delete from bookinfo2 where bid=?";
+		jt.update(sql, bid);
+	}
+	public void update(BkDTO bkDTO) {
+		String sql="update bookinfo2 set btitl=?, burl=? where bid=?";
+		jt.update(sql, bkDTO.getBtitl(), bkDTO.getBurl(), bkDTO.getBid());
+	}
 
   
 }

@@ -11,25 +11,16 @@
 </head>
 	<div layout:fragment="main" id="main">
 		<h2> 도서 상세 페이지 </h2>
-		<form id="fm" method="post" action="@{/update}" th:object="${bkDTO}" enctype="multipart/form-data">
-		<input type="hidden" name="bid" th:value="${bkDTO.bid}">
 		<a href="/bookindex">목록으로 돌아가기</a>
 		<table th:object="${bkDTO}">
 			<tr>
 				<td class="tdhead">책 제목</td>
-				<td class="data"><input type="text" th:field="*{btitl}" /></td>
+				<td class="data" th:text="*{btitl}"></td>
 			</tr>
 			<tr>
 				<td class="tdhead">표지</td>
-				<td class="imgdata"><img th:src="@{'/img/' + ${bkDTO.burl}}" alt="Book img"/><input type="file" th:field="*{bimg}" /></td>
-			</tr>
-			<tr>
-				<td>
-					<button type="submit" id="modify"> 수정 </button>
-					<button type="button" id="delete" th:data-bid="${bkDTO.bid}"> 삭제 </button>
-				</td>
+				<td class="imgdata"><img th:src="@{'/img/' + ${bkDTO.burl}}" alt="Book img"/></td>
 			</tr>
 		</table>
-		</form>
 	</div>
 </html>

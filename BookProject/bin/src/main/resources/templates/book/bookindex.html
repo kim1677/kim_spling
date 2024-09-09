@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title">도서관리화면</title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+	    <div>
+            <h2>도서 목록</h2>
+            <ul>
+                <li th:each="book : ${bookList}">
+                    제목: <a th:href="@{'/view/' + ${book.bid}}" th:text="${book.btitl}"></a><br>
+                    이미지: <img th:src="@{'/img/' + ${book.burl}}" alt="Book img"/>
+                </li>
+            </ul>
+        </div>
+	</div>
+</html>
