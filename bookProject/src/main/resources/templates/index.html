@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{movie/default}">
+<head>
+	<title layout:fragment="title">영화동아리</title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2> 5조 도서관 관리화면 </h2>
+		<div> <a href="login">로그인</a> </div>
+		<div> <a href="bookindex">도서 관리</a> </div>
+	</div>
+</html>

@@ -1,0 +1,113 @@
+/* default.css */
+@charset "UTF-8";
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+ul{ list-style-type:none; }
+#wrap{
+	width:1300px;
+	margin:0 auto;
+}
+#header{
+	width:100%;
+	margin-bottom:30px;
+	border-bottom:1px solid #ddd;
+	background:white;
+	position:sticky;
+	top:0;
+	z-index:100;
+}
+#nav{
+	padding:10px 0;
+	display:flex;
+	align-items:center;
+}
+#navTop{
+	display:flex;
+	justify-content:space-between;
+}
+#userBox{
+	display:flex;
+}
+#menuList{
+	display:flex;
+	justify-content:space-between;
+}
+.menu{
+	border-right:2px solid lightgray;
+	border-bottom:2px solid lightgray;
+}
+.menu:hover{
+	font-weight:800;
+	color:black;
+	background:lightgreen;
+}
+#footer{
+	width:100%;
+	margin-top:30px;
+	border-top:1px solid #ddd;
+	position:sticky;
+	bottom:0;
+	background:#fff;
+	z-index:100;
+}
+#law{
+	margin:15px 0;
+}
+#footer li{
+	padding:0 5px;
+	margin:0 15px;
+	position:relative;
+}
+#banner ul{
+	display:flex;
+	left:10px;
+}
+#law ul{
+	display:flex;
+	left:10px;
+}
+#footer li:hover{
+	font-weight:800;
+	color:black;
+	background:lightgreen;
+	cursor:pointer;
+}
+#info ul{
+	display:flex;
+	margin-left:20px;
+}
+#info ul p{
+	margin-right:40px;
+}
+#logo .logo{
+	background:url(/image/5teamlibrary.jpg) no-repeat center;
+	background-size:cover;
+	height:50px;
+	width:70px;
+	cursor:pointer;
+}
+#copyright ul .logo2{
+	background:url(/image/5teamlibrary2.jpg) no-repeat center;
+	background-size:cover;
+	height:50px;
+	width:250px;
+	cursor:pointer;
+}
+.btitl{
+	width:400px;
+}
+.bsubt{
+	width:400px;
+}
+.bvolu{
+	width:50px;
+}
+.bwrit{
+	width:250px;
+}
+.bpubl{
+	width:250px;
+}

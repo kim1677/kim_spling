@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title">도서관리화면</title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+	
+</head>
+
+	<div layout:fragment="main" id="main">
+		<h1>도서 관리 페이지</h1>
+		<div>
+            <table>
+            	<thead>
+            		<tr>
+            			<td class="btitl">제목</td>
+            			<td class="bsubt">부제</td>
+            			<td class="bvolu">권수</td>
+            			<td class="bwrit">지은이</td>
+            			<td class="bpubl">출판사</td>
+            			<td class="burl">표지</td>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr th:each="book : ${bookList}">
+            			<td class="btitl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.btitl}"></a> </td>
+            			<td class="bsubt"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bsubt}"></a> </td>
+            			<td class="bvolu"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bvolu}"></a> </td>
+            			<td class="bwrit"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bwrit}"></a> </td>
+            			<td class="bpubl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bpubl}"></a> </td>
+            			<td class="burl"> <img th:src="@{${book.burl}}" alt="이미지" style="max-width:80px;" /> </td>
+            		</tr>
+            	</tbody>
+            </table>
+        </div>
+        
+        <!-- 페이징 버튼 영역 -->
+        <div class="pagination">
+	        <ul>
+	            <li th:if="${currentPage > 0}">
+	                <a th:href="@{|/?page=${currentPage - 1}|}">이전</a>
+	            </li>
+	            <li th:each="i : ${#numbers.sequence((currentPage / 10) * 10, ((currentPage / 10) * 10 + 9 < totalPages - 1) ? (currentPage / 10) * 10 + 9 : totalPages - 1)}">
+	                <a th:href="@{'/?page=' + ${i}}" th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active' : ''"></a>
+	            </li>
+	            <li th:if="${currentPage < totalPages - 1}">
+	                <a th:href="@{|/?page=${currentPage + 1}|}">다음</a>
+	            </li>
+	        </ul>
+    	</div>
+    	
+	</div>
+</html>

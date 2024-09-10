@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/js/view.js}"></script>
+	</th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2> 도서 상세 내용 확인 페이지 </h2>
+		<form id="fm" method="post" action="/update" th:object="${bkDTO}" enctype="multipart/form-data">
+			<input type="hidden" name="bid" th:value="${bkDTO.bid}">
+			<table>
+				<tr>
+					<td class="tdhead">책 제목</td>
+					<td class="data"><input type="text" th:field="*{btitl}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">표지</td>
+					<td class="data">
+						<img th:src="@{${bkDTO.burl}}" th:alt="*{btitl}" />
+						<input type="file" th:field="*{bimg}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" id="modify"> 수정 </button>
+						<button type="button" id="delete" th:data-bid="${bkDTO.bid}"> 삭제 </button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</html>

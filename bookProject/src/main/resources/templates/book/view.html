@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" th:href="@{/css/view.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/js/view.js}"></script>
+	</th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2> 도서 상세 페이지 </h2>
+		<form id="fm" method="post" action="/update" th:object="${bkDTO}" enctype="multipart/form-data">
+			<input type="hidden" name="bid" th:value="${bkDTO.bid}">
+			<table>
+				<tr>
+					<td class="tdhead">책제목</td>
+					<td class="data"><input type="text" th:field="*{btitl}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">부제</td>
+					<td class="data"><input type="text" th:field="*{bsubt}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">권수</td>
+					<td class="data"><input type="text" th:field="*{bvolu}" min=1 /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">지은이</td>
+					<td class="data"><input type="text" th:field="*{bwrit}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">옮긴이</td>
+					<td class="data"><input type="text" th:field="*{btran}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">주제어</td>
+					<td class="data"><input type="text" th:field="*{bkeyw}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">출판사</td>
+					<td class="data"><input type="text" th:field="*{bpubl}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">페이지</td>
+					<td class="data"><input type="text" th:field="*{bpage}" min=1 /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">발행일</td>
+					<td class="data"><input type="text" th:field="*{bdate}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">가격</td>
+					<td class="data"><input type="text" th:field="*{bpric}" min=1000 /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">분류</td>
+					<td class="data"><input type="text" th:field="*{bsort}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">코드번호</td>
+					<td class="data"><input type="text" th:field="*{bcode}" /></td>
+				</tr>
+				<tr>
+					<td class="tdhead">목차</td>
+					<td class="contdata"><textarea th:field="*{bcont}" class="textarea"></textarea></td>
+				</tr>
+				<tr>
+					<td class="tdhead">표지</td>
+					<td class="imgdata">
+						<img th:src="@{${bkDTO.burl}}" th:alt="*{btitl}" style="max-width:300px;" />
+						<input type="file" th:field="*{bimg}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" id="modify">수정</button>
+						<button type="button" id="delete" th:data-bid="${bkDTO.bid}">삭제</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</html>

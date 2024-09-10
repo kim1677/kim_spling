@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h2> 이미지 입력 테스트 </h2>
+		<form method="post" action="/image" enctype="multipart/form-data" th:object="${bkImgDTO}">
+			이미지 업로드 테스트 : <input type="file" th:field="*{bimg}"><br>
+			<button>이미지저장</button>
+		</form>
+	</div>
+</html>

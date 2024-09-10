@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+	<div layout:fragment="main" id="main">
+		<h1>도서 관리 페이지</h1>
+		<div>
+            <table>
+            	<thead>
+            		<tr>
+            			<td class="btitl">제목</td>
+            			<td class="bimg">표지</td>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr th:each="book : ${bookList}">
+            			<td class="btitl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.btitl}"></a> </td>
+            			<td class="burl"> <img th:src="@{${book.burl}}" alt="*{btitl}" style="max-width:100px;" /> </td>
+            		</tr>
+            	</tbody>
+            </table>
+        </div>
+	</div>
+</html>
