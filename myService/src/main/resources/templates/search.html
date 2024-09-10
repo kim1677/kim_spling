@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2> 책 제목 입력 </h2>
+	<form method="get" action="/searchkeyword" th:object="${bookSearch}">
+    	<input type="text" th:field="*{title}">
+    <button>검색</button>
+</form>
+</body>
+</html>
