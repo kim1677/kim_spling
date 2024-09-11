@@ -28,7 +28,7 @@
             			<td class="bvolu"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bvolu}"></a> </td>
             			<td class="bwrit"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bwrit}"></a> </td>
             			<td class="bpubl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bpubl}"></a> </td>
-            			<td class="burl"> <img th:src="@{${book.burl}}" alt="이미지" style="max-width:80px;" /> </td>
+            			<td class="burl"> <img th:src="@{${book.burl}}" th:alt="${book.btitl}" style="max-width:80px; max-height:80px;" /> </td>
             		</tr>
             	</tbody>
             </table>

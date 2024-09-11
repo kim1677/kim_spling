@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class BkDTO {
-	private int bid;
+	private Long bid;
 	@NotEmpty(message="필수 기재 사항")
 	private String btitl;
 	private String bsubt;
@@ -21,10 +21,19 @@ public class BkDTO {
 	private String bpubl;
 	private int bpage;
 	private String bdate;
+	@Min(value=1000, message="최소 1000원")
 	private int bpric;
 	private String bsort;
 	private String bcode;
 	private String bcont;
 	private String burl;
+	private String filename;
 	private MultipartFile bimg;
+	
+	public static BkDTO of(String btitl) {
+		BkDTO bkDto = new BkDTO();
+		bkDto.setBtitl(btitl);
+		return bkDto;
+	}
+	
 }

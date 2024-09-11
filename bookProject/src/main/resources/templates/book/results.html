@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+	<title layout:fragment="title"></title>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+</head>
+<body>
+	<div layout:fragment="main" id="main">
+		<h2> 검색 결과 </h2>
+		<div>
+		<table>
+			<thead>
+            	<tr>
+            		<td class="btitl">제목</td>
+            		<td class="bsubt">부제</td>
+            		<td class="bvolu">권수</td>
+            		<td class="bwrit">지은이</td>
+            		<td class="bpubl">출판사</td>
+            		<td class="burl">표지</td>
+            	</tr>
+            </thead>
+			<tbody>
+			<tr th:each="book : ${books}">
+				<!-- 제목 -->
+				<td th:text="${book.btitl}"></td>
+						
+				<!-- 부제 -->
+				<td th:text="${book.bsubt}"></td>
+						
+				<!-- 권수 -->
+				<td th:text="${book.bvolu}"></td>
+						
+				<!-- 지은이 -->
+				<td th:text="${book.bwrit}"></td>
+						
+				<!-- 출판사 -->
+				<td th:text="${book.bpubl}"></td>		
+			</tr>
+			</tbody>
+			</table>
+		</div>
+		
+	</div>
+</body>
+</html>
