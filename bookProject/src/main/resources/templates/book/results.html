@@ -7,39 +7,40 @@
 </head>
 <body>
 	<div layout:fragment="main" id="main">
-		<h2> 검색 결과 </h2>
+		<h2> 도서 검색 결과 페이지 </h2>
+		<p> 검색 키워드 </p>
+		<p th:if="${sk1!=''}" th:text="${st1}+' : '+${sk1}"></p>
+		<p th:if="${sk2!=''}" th:text="${st2}+' : '+${sk2}"></p>
+		<p th:if="${sk3!=''}" th:text="${st3}+' : '+${sk3}"></p>
+		<p th:if="${sk4!=''}" th:text="${st4}+' : '+${sk4}"></p>
 		<div>
-		<table>
-			<thead>
-            	<tr>
-            		<td class="btitl">제목</td>
-            		<td class="bsubt">부제</td>
-            		<td class="bvolu">권수</td>
-            		<td class="bwrit">지은이</td>
-            		<td class="bpubl">출판사</td>
-            		<td class="burl">표지</td>
-            	</tr>
-            </thead>
-			<tbody>
-			<tr th:each="book : ${books}">
-				<!-- 제목 -->
-				<td th:text="${book.btitl}"></td>
-						
-				<!-- 부제 -->
-				<td th:text="${book.bsubt}"></td>
-						
-				<!-- 권수 -->
-				<td th:text="${book.bvolu}"></td>
-						
-				<!-- 지은이 -->
-				<td th:text="${book.bwrit}"></td>
-						
-				<!-- 출판사 -->
-				<td th:text="${book.bpubl}"></td>		
-			</tr>
-			</tbody>
+			<table>
+				<thead>
+					<tr>
+						<td class="btitl">제목</td>
+						<td class="bsubt">부제</td>
+						<td class="bvolu">권수</td>
+						<td class="bwrit">지은이</td>
+						<td class="bpubl">출판사</td>
+						<td class="bsort">분류</td>
+						<td class="burl">표지</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td class="btitl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.btitl}"></a> </td>
+						<td class="bsubt"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bsubt}"></a> </td>
+						<td class="bvolu"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bvolu}"></a> </td>
+						<td class="bwrit"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bwrit}"></a> </td>
+						<td class="bpubl"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bpubl}"></a> </td>
+						<td class="bsort"> <a th:href="@{'/view/'+${book.bid}}" th:text="${book.bsort}"></a> </td>
+						<td class="burl"><img th:src="@{${book.burl}}" th:alt="${book.btitl}" style="max-width:80px; max-height:80px;" /></td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
+		
+		
 		
 	</div>
 </body>

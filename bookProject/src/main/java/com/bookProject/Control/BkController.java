@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bookProject.DTO.BkDTO;
 import com.bookProject.DTO.BkSearchDTO;
@@ -45,11 +48,31 @@ public class BkController {
 	}
 	
 	@GetMapping("/searchkeyword")
-    public String bookSearch(@RequestParam String btitl, Model model) {
-        List<BkDTO> books = bkService.searchByTitle(btitl);
-        model.addAttribute("books", books);
-        return "book/results";  // 검색 결과를 보여줄 페이지
-    }
+	public String bookSearch(HttpServletRequest rq, Model model, RedirectAttributes ra) {
+		String st1=rq.getParameter("searchType1");
+		String sk1=rq.getParameter("searchKeyword1");
+		String st2=rq.getParameter("searchType2");
+		String sk2=rq.getParameter("searchKeyword2");
+		String st3=rq.getParameter("searchType3");
+		String sk3=rq.getParameter("searchKeyword3");
+		String st4=rq.getParameter("searchType4");
+		String sk4=rq.getParameter("searchKeyword4");
+		List<BkDTO> books=bkService.searchBooksByMultipleCriteria(st1, sk1, st2, sk2, st3, sk3, st4, sk4);
+		if(books.isEmpty()) {
+			ra.addFlashAttribute("alertMessage","검색 결과가 없습니다");
+			return "redirect:/search";
+		}
+		model.addAttribute("books",books);
+		model.addAttribute("st1",st1);
+		model.addAttribute("sk1",sk1);
+		model.addAttribute("st2",st2);
+		model.addAttribute("sk2",sk2);
+		model.addAttribute("st3",st3);
+		model.addAttribute("sk3",sk3);
+		model.addAttribute("st4",st4);
+		model.addAttribute("sk4",sk4);
+		return "book/results";
+	}
 
 	@GetMapping("/write")
 	public String write(Model model){
