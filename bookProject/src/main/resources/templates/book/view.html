@@ -11,6 +11,10 @@
 </head>
 	<div layout:fragment="main" id="main">
 		<h2> 도서 상세 페이지 </h2>
+		<a href="javascript:void(0)" th:if="${bk.bid==minBid}" onclick="alert('첫 번째 등록 도서입니다');" style="float:left; font-size:24px;">&#8592;</a>
+		<a th:href="@{'/view/'+${preBid}}" th:if="${bk.bid>minBid}" style="float:left; font-size:24px;">&#8592;</a>
+		<a href="javascript:void(0)" th:if="${bk.bid==maxBid}" onclick="alert('마지막 등록 도서입니다');" style="float:right; font-size:24px;">&#8594;</a>
+		<a th:href="@{'/view/'+${nextBid}}" th:if="${bk.bid<maxBid}" style="float:right; font-size:24px;">&#8594;</a>
 		<form id="fm" method="post" action="/update" th:object="${bk}" enctype="multipart/form-data">
 			<input type="hidden" name="bid" th:value="${bk.bid}">
 			<table>

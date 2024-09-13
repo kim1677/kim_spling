@@ -18,7 +18,6 @@ import com.bookProject.DTO.BkSearchDTO;
 import com.bookProject.Entity.Bk;
 import com.bookProject.Repository.BkRepository;
 
-
 @Service
 public class BkService {
 	@Autowired
@@ -29,19 +28,23 @@ public class BkService {
 			bkRepository.save(bk);
 		}
 	}
-	
-	public List<Bk> findAllBooks(){ 
-		return bkRepository.findAll(); 
-	}
-	
-	public BkDTO findById(Long bid) {
+	public List<Bk> findAllBooks(){ return bkRepository.findAll(); }
+	public Optional<BkDTO> findById(Long bid) {
 		Optional<Bk> optionalBk=bkRepository.findById(bid);
-		if(optionalBk.isPresent()) {
-			return convertEntityToDTO(optionalBk.get());
-		}
-		return null;
+		return optionalBk.map(this::convertEntityToDTO);
 	}
-	
+	public Long findNextValidBid(Long bid) {
+		return bkRepository.findNextValidBid(bid);
+	}
+	public Long findPreviousValidBid(Long bid) {
+		return bkRepository.findPreviousValidBid(bid);
+	}
+	public Long findMinBid() {
+		return bkRepository.findMinBid();
+	}
+	public Long findMaxBid() {
+		return bkRepository.findMaxBid();
+	}
 	@Transactional
 	public void delete(Long bid) { bkRepository.deleteById(bid); }
 	public void update(BkDTO bkDTO) {
@@ -50,7 +53,6 @@ public class BkService {
 			bkRepository.save(bk);
 		}
 	}
-	
 	public List<BkDTO> findPaginated(int page, int pageSize) {
 		Pageable pageable=PageRequest.of(page, pageSize, Sort.by("bid").descending());
 		Page<Bk> paginatedResult=bkRepository.findAll(pageable);
@@ -60,11 +62,9 @@ public class BkService {
 				.collect(Collectors.toList());
 		return booklist;
 	}
-	
 	public int countAllBooks() {
 			return (int) bkRepository.count();
 	}
-	
 	private Bk convertDTOToEntity(BkDTO bkDTO) {
 		Bk bk=new Bk();
 		bk.setBid(bkDTO.getBid());
@@ -85,7 +85,6 @@ public class BkService {
 		bk.setFilename(bkDTO.getFilename());
 		return bk;
 	}
-	
 	private BkDTO convertEntityToDTO(Bk bk) {
 		BkDTO bkDTO=new BkDTO();
 		bkDTO.setBid(bk.getBid());
@@ -106,12 +105,10 @@ public class BkService {
 		bkDTO.setFilename(bk.getFilename());
 		return bkDTO;
 	}
-	
 	public BkDTO search(BkSearchDTO bkSearchDTO) {
 		BkDTO bkDTO = BkDTO.of(bkSearchDTO.getBtitl());
 		return bkDTO;
 	}
-
 	public Page<BkDTO> searchBooksByMultipleCriteria(String st1, String sk1, String st2, String sk2, String st3, String sk3, String st4, String sk4, Pageable pageable){
 		String titl=null, writ=null, publ=null, sort=null;
 		if(st1!=null&&!sk1.isBlank()) {
@@ -138,9 +135,7 @@ public class BkService {
 			if(st4.equals("bpubl")) publ=sk4;
 			if(st4.equals("bsort")) sort=sk4;
 		}
-		
 		Page<Bk> books=bkRepository.findByMultipleCriteria(titl,writ,publ,sort,pageable);
 		return books.map(this::convertEntityToDTO);
-
 	}
 }

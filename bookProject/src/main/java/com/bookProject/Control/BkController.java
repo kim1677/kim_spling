@@ -1,6 +1,7 @@
 package com.bookProject.Control;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class BkController {
 	private final BkService bkService;
 	private final FileService fileService;
-	
 	@GetMapping("/")
 	public String home(Model model, @RequestParam(defaultValue = "0") int page) {
 		int pageSize = 10;
@@ -42,14 +42,11 @@ public class BkController {
 		model.addAttribute("totalPages", totalPages);
 		return "book/index";
 	}
-
 	@GetMapping("/search")
 	public String search(Model model){
 		model.addAttribute("bkSearchDTO", new BkSearchDTO());
 		return "book/search";
 	}
-
-
 	@GetMapping("/searchkeyword")
 	public String bookSearch(HttpServletRequest rq, Model model, RedirectAttributes ra, @RequestParam(defaultValue = "0") int page) {
 		String st1=rq.getParameter("searchType1");
@@ -60,35 +57,44 @@ public class BkController {
 		String sk3=rq.getParameter("searchKeyword3");
 		String st4=rq.getParameter("searchType4");
 		String sk4=rq.getParameter("searchKeyword4");
+		String stl1=convertToReadableLabel(st1);
+		String stl2=convertToReadableLabel(st2);
+		String stl3=convertToReadableLabel(st3);
+		String stl4=convertToReadableLabel(st4);
 		int pageSize=10;
 		Pageable pageable=PageRequest.of(page, pageSize);
 		if(sk1.isEmpty()&&sk2.isEmpty()&&sk3.isEmpty()&&sk4.isEmpty()) {
 			ra.addFlashAttribute("alertMessage","검색 결과가 없습니다");
 			return "redirect:/search";
 		}
-		
 		Page<BkDTO> books=bkService.searchBooksByMultipleCriteria(st1, sk1, st2, sk2, st3, sk3, st4, sk4, pageable);
-
 		model.addAttribute("books",books.getContent());
 		model.addAttribute("currentPage",page);
 		model.addAttribute("totalPages",books.getTotalPages());
-		model.addAttribute("st1",st1);
+		model.addAttribute("st1",stl1);
 		model.addAttribute("sk1",sk1);
-		model.addAttribute("st2",st2);
+		model.addAttribute("st2",stl2);
 		model.addAttribute("sk2",sk2);
-		model.addAttribute("st3",st3);
+		model.addAttribute("st3",stl3);
 		model.addAttribute("sk3",sk3);
-		model.addAttribute("st4",st4);
+		model.addAttribute("st4",stl4);
 		model.addAttribute("sk4",sk4);
 		return "book/results";
 	}
-	
+	private String convertToReadableLabel(String st) {
+		switch(st) {
+		case "btitl": return "책 제목";
+		case "bwrit": return "지은이";
+		case "bpubl": return "출판사";
+		case "bsort": return "저자";
+		default: return "";
+		}
+	}
 	@GetMapping("/write")
 	public String write(Model model){
 		model.addAttribute("bkDTO",new BkDTO());
 		return "book/write";
 	}
-	
 	@PostMapping("/write")
 	public String write(@ModelAttribute BkDTO bkDTO, @RequestParam("bimg") MultipartFile file, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) { return "book/write"; }
@@ -107,23 +113,37 @@ public class BkController {
 				e.printStackTrace();
 			}
 		}
-		
 		bkService.bookSave(bkDTO);
-		return "redirect:/write";
+		return "redirect:/";
 	}
-
 	@GetMapping("/view/{bid}")
-	public String view(@PathVariable("bid") Long bid, Model model){
-		model.addAttribute("bk",bkService.findById(bid));
+	public String view(@PathVariable("bid") Long bid, Model model, RedirectAttributes ra){
+		Optional<BkDTO> bko=bkService.findById(bid);
+		if(!bko.isPresent()) {
+			Long nextBid=bkService.findNextValidBid(bid);
+			if(nextBid!=null) {
+				return "redirect:/view/"+nextBid;
+			}
+			ra.addFlashAttribute("alertMessage","해당 도서를 찾을 수 없습니다.");
+			return "redirect:/error";
+		}
+		BkDTO bk=bko.get();
+		Long maxBid=bkService.findMaxBid();
+		Long minBid=bkService.findMinBid();
+		Long preBid=bkService.findPreviousValidBid(bid);
+		Long nextBid=bkService.findNextValidBid(bid);
+		model.addAttribute("bk",bk);
+		model.addAttribute("maxBid",maxBid);
+		model.addAttribute("minBid",minBid);
+		model.addAttribute("preBid",preBid);
+		model.addAttribute("nextBid",nextBid);
 		return "book/view";
 	}
-	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("bid") Long bid) {
 		bkService.delete(bid);
 		return "redirect:/";
 	}
-	
 	@PostMapping("/update")
 	public String update(@ModelAttribute BkDTO bkDTO, @RequestParam("bimg") MultipartFile file, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) { return "book/write"; }
@@ -142,9 +162,10 @@ public class BkController {
 				e.printStackTrace();
 			}
 		} else {
-			bkDTO.setBurl(bkService.findById(bkDTO.getBid()).getBurl());
+			BkDTO bbkk=bkService.findById(bkDTO.getBid()).orElseThrow(() -> new RuntimeException("도서를 찾을 수 없습니다"));
+			bkDTO.setBurl(bbkk.getBurl());
 		}
 		bkService.update(bkDTO);
-		return "redirect:/view/"+bkDTO.getBid();
+		return "redirect:/";
 	}
 }
