@@ -5,7 +5,6 @@
 	<th:block layout:fragment="css"></th:block>
 	<th:block layout:fragment="script"></th:block>
 </head>
-<body>
 	<div layout:fragment="main" id="main">
 		<h2> 도서 검색 결과 페이지 </h2>
 		<p> 검색 키워드 </p>
@@ -39,9 +38,18 @@
 				</tbody>
 			</table>
 		</div>
-		
-		
-		
+		<div class="pagination">
+			<ul>
+				<li th:if="${currentPage>0}">
+					<a th:href="@{|/searchkeyword?page=${currentPage-1}&searchType1=${st1}&searchKeyword1=${sk1}&searchType2=${st2}&searchKeyword2=${sk2}&searchType3=${st3}&searchKeyword3=${sk3}&searchType4=${st4}&searchKeyword4=${sk4}|}">이전</a>
+				</li>
+				<li th:each="i : ${#numbers.sequence(0,totalPages-1)}">
+					<a th:href="@{|/searchkeyword?page=${i}&searchType1=${st1}&searchKeyword1=${sk1}&searchType2=${st2}&searchKeyword2=${sk2}&searchType3=${st3}&searchKeyword3=${sk3}&searchType4=${st4}&searchKeyword4=${sk4}|}" th:text="${i+1}" th:classappend="${i==currentPage} ? 'active' : ''"></a>
+				</li>
+				<li th:if="${currentPage<totalPages-1}">
+					<a th:href="@{|searchkeyword?page=${currentPage+1}&searchType1=${st1}&searchKeyword1=${sk1}&searchType2=${st2}&searchKeyword2=${sk2}&searchType3=${st3}&searchKeyword3=${sk3}&searchType4=${st4}&searchKeyword4=${sk4}|}">다음</a>
+				</li>
+			</ul>
+		</div>
 	</div>
-</body>
 </html>
