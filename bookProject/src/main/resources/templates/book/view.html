@@ -6,10 +6,9 @@
 		<link rel="stylesheet" th:href="@{/css/view.css}">
 	</th:block>
 	<th:block layout:fragment="script">
-		<script th:src="@{/js/view.js}"></script>
 	</th:block>
 </head>
-	<div layout:fragment="main" id="main">
+	<div layout:fragment="main" id="main"><script th:src="@{/js/view.js}"></script>
 		<h2> 도서 상세 페이지 </h2>
 		<a href="javascript:void(0)" th:if="${bk.bid==minBid}" onclick="alert('첫 번째 등록 도서입니다');" style="float:left; font-size:24px;">&#8592;</a>
 		<a th:href="@{'/view/'+${preBid}}" th:if="${bk.bid>minBid}" style="float:left; font-size:24px;">&#8592;</a>
