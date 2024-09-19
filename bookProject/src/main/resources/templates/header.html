@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<div th:fragment="header" id="header">
-		<div id="navTop">
-			<ul id="logo">
-				<div>
-					<div class="logo"></div>
-					<div class="menu"> <a href="/"> 5조도서관 홈 </a> </div>
-				</div>
-			</ul>
-			<ul id="userBox">
-				<th:block th:if="${session.user!=null}">
-					<li class="menu" th:text="${#session.getAttribute('user').nick}+'회원님!'"></li>
-					<li class="menu"> 로그아웃 </li>
-				</th:block>
-				<th:block th:if="${session.user==null}">
-					<li class="menu"> 회원가입 </li>
-					<li class="menu"> 관리자 로그인 </li>
-				</th:block>
-			</ul>
-		</div>
-		<div id="navBottom">
-			<ul id="menuList">
-				<li class="menu"> <a href="/search">도서 검색</a> </li>
-				<li class="menu"> <a href="/write">도서 등록</a> </li>
-				<li class="menu">  </li>
-				<li class="menu">  </li>
-				<li class="menu">  </li>
-			</ul>
-		</div>
-	</div>
+        <!-- Header Section -->
+        <div th:fragment="header" id="header">
+            <!-- 통합된 네비게이션 -->
+            <div id="nav">
+                <!-- 왼쪽 로고 영역 -->
+                <ul id="logo">
+                    <div>
+                        <div class="logo"></div> <!-- 로고 이미지 -->
+                    </div>
+                </ul>
+
+                <!-- 중앙 메뉴 (도서 검색, 도서 등록) -->
+                <div id="centerMenu">
+                    <ul id="menuList">
+                        <li class="menu"> <a href="/search">도서 검색</a> </li>
+                        <li class="menu"> <a href="/write">도서 등록</a> </li>
+                    </ul>
+                </div>
+
+                <!-- 오른쪽 사용자 메뉴 (회원가입, 관리자 로그인) -->
+                <div id="rightMenu">
+                    <ul id="userBox">
+                        <th:block th:if="${session.user != null}">
+                            <li class="menu" th:text="${#session.getAttribute('user').nick} + ' 회원님!'"></li>
+                            <li class="menu"> 로그아웃 </li>
+                        </th:block>
+                        <th:block th:if="${session.user == null}">
+                            <li class="menu"> 회원가입 </li>
+                            <li class="menu"> 관리자 로그인 </li>
+                        </th:block>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
 </html>

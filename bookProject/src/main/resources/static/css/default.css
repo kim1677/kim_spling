@@ -1,128 +1,199 @@
-/* default.css */
 @charset "UTF-8";
 *{
-	margin:0;
-	padding:0;
-	box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-ul{ list-style-type:none; }
+select, input[type="text"] {
+    width: 10%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#searchKeyword1, #searchKeyword2, #searchKeyword3, #searchKeyword4 {
+    width: 85%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+}
 #wrap{
-	width:1300px;
-	margin:0 auto;
+    width:1300px;
+    margin:0 auto;
+}
+ul{ 
+	list-style-type:none; 
 }
 #header{
-	width:100%;
-	margin-bottom:30px;
-	border-bottom:1px solid #ddd;
-	background:white;
-	position:sticky;
-	top:0;
-	z-index:100;
+    width:100%;
+    margin-bottom:30px;
+    border-bottom:1px solid #ddd;
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 #nav{
-	padding:10px 0;
-	display:flex;
-	align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
 #navTop{
-	display:flex;
-	justify-content:space-between;
+    display:flex;
+    justify-content:space-between;
+}
+#centerMenu {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+#rightMenu {
+    display: flex;
+    justify-content: flex-end;
 }
 #userBox{
-	display:flex;
+    display:flex;
+    gap: 20px;
 }
 #menuList{
-	display:flex;
-	justify-content:space-between;
+    display:flex;
+    justify-content:space-between;
 }
 .menu{
-	border-right:2px solid lightgray;
-	border-bottom:2px solid lightgray;
+    padding: 10px 20px;
+    border-right: none;
+    border-right:2px solid lightgray;
 }
-.menu:hover{
-	font-weight:800;
-	color:black;
-	background:lightgreen;
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.menu:hover {
+    font-weight: 800;
+    background: lightgreen;
+    border-radius: 5px;
 }
 #footer{
-	width:100%;
-	margin-top:30px;
-	border-top:1px solid #ddd;
-	position:sticky;
-	bottom:0;
-	background:#fff;
-	z-index:100;
+    width:100%;
+    margin-top:30px;
+    border-top:1px solid #ddd;
+    position:relative;
+    bottom:0;
+    background:#fff;
+    z-index:100;
 }
 #law{
-	margin:15px 0;
+    margin:15px 0;
 }
 #footer li{
-	padding:0 5px;
-	margin:0 15px;
-	position:relative;
-}
-#banner ul{
-	display:flex;
-	left:10px;
-}
-#law ul{
-	display:flex;
-	left:10px;
+    padding:0 5px;
+    margin:0 15px;
+    position:relative;
 }
 #footer li:hover{
-	font-weight:800;
-	color:black;
-	background:lightgreen;
-	cursor:pointer;
+    font-weight:800;
+    color:black;
+    background:lightgreen;
+    cursor:pointer;
+}
+#banner, #law, #info{
+    height:auto;
+    max-height:30px;
+    overflow:hidden;
+}
+#banner ul{
+    display:flex;
+    justify-content:center;
+    left:10px;
+}
+#banner ul li img{
+    width:125px;
+    max-height:30px;
+    object-fit:contain;
+}
+#law ul{
+    display:flex;
+    margin-left:10px;
 }
 #info ul{
-	display:flex;
-	margin-left:20px;
+    display:flex;
+    margin-left:20px;
 }
 #info ul p{
-	margin-right:40px;
+    margin-right:40px;
 }
 #logo .logo{
-	background:url(/image/5teamlibrary.jpg) no-repeat center;
-	background-size:cover;
-	height:50px;
-	width:70px;
-	cursor:pointer;
+    background:url(/image/5teamlibrary.jpg) no-repeat center;
+    background-size:cover;
+    height:50px;
+    width:70px;
+    cursor:pointer;
 }
-#copyright ul .logo2{
-	background:url(/image/5teamlibrary2.jpg) no-repeat center;
-	background-size:cover;
-	height:50px;
-	width:250px;
-	cursor:pointer;
+#info ul .logo2{
+    background:url(/image/5teamlibrary2.jpg) no-repeat center;
+    background-size:cover;
+    height:30px;
+    width:120px;
+    object-fit:contain;
+    cursor:pointer;
+}
+.btitl, .bsubt, .bvolu, .bwrit, .bpubl, .bsort, .burl {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
 .btitl{
-	width:400px;
+    width:400px;
+    text-align:center;
 }
 .bsubt{
-	width:400px;
+    width:300px;
+    text-align:center;
 }
 .bvolu{
-	width:50px;
+    width:50px;
+    text-align:center;
 }
 .bwrit{
-	width:250px;
+    width:180px;
+    text-align:center;
 }
 .bpubl{
-	width:250px;
+    width:180px;
+    text-align:center;
 }
-
+.bsort{
+    width:100px;
+    text-align:center;
+}
+.burl{
+    width:80px;
+}
 .pagination ul {
     display: flex;
-    justify-content: center; /* 버튼들이 가운데에 정렬되도록 */
+    justify-content: center;
     padding: 0;
 }
-
 .pagination ul li {
     list-style: none;
-    margin-right: 10px; /* 버튼 사이에 간격 추가 */
+    margin-right: 10px;
 }
-
 .pagination ul li a {
     text-decoration: none;
     padding: 8px 12px;
@@ -130,12 +201,20 @@ ul{ list-style-type:none; }
     border-radius: 5px;
     color: black;
 }
-
 .pagination ul li a.active {
     background-color: lightgreen;
     font-weight: bold;
 }
-
 .pagination ul li a:hover {
     background-color: #ddd;
+}
+#navBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menuList {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }

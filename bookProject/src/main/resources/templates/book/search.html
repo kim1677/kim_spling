@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
 <head>
-    <title layout:fragment="title"></title>
+    <title layout:fragment="title">도서 검색 페이지</title>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
 </head>
 <body>
 <div layout:fragment="main" id="main">
-    <h2> 도서 검색 페이지 </h2>
-		<script th:if="${alertMessage != null}" th:inline="javascript"></script>
-		<form method="get" action="/searchkeyword">
-			<label for="searchType1"></label>
-			<select id="searchType1" name="searchType1">
-				<option value="btitl">책 제목</option>
-				<option value="bwrit">지은이</option>
-				<option value="bpubl">출판사</option>
-				<option value="bsort">분류</option>
-			</select>
-			<input type="text" id="searchKeyword1" name="searchKeyword1" placeholder="책 제목 입력"><br>
+    <h2> 도서 검색 페이지 </h2><br>
+	<script th:if="${alertMessage != null}" th:inline="javascript"></script>
+	<form method="get" action="/searchkeyword">
+		<label for="searchType1"></label>
+		<select id="searchType1" name="searchType1">
+			<option value="btitl">책 제목</option>
+			<option value="bwrit">지은이</option>
+			<option value="bpubl">출판사</option>
+			<option value="bsort">분류</option>
+		</select>
+		<input type="text" id="searchKeyword1" name="searchKeyword1" placeholder="책 제목 입력"><br>
 
-			<label for="searchType2"></label>
-			<select id="searchType2" name="searchType2">
-				<option value="bwrit">지은이</option>
-				<option value="btitl">책 제목</option>
-				<option value="bpubl">출판사</option>
-				<option value="bsort">분류</option>
-			</select>
-			<input type="text" id="searchKeyword2" name="searchKeyword2" placeholder="지은이 입력"><br>
+		<label for="searchType2"></label>
+		<select id="searchType2" name="searchType2">
+			<option value="bwrit">지은이</option>
+			<option value="btitl">책 제목</option>
+			<option value="bpubl">출판사</option>
+			<option value="bsort">분류</option>
+		</select>
+		<input type="text" id="searchKeyword2" name="searchKeyword2" placeholder="지은이 입력"><br>
 
-			<label for="searchType3"></label>
-			<select id="searchType3" name="searchType3">
-				<option value="bpubl">출판사</option>			
-				<option value="btitl">책 제목</option>
-				<option value="bwrit">지은이</option>
-				<option value="bsort">분류</option>
-			</select>
-			<input type="text" id="searchKeyword3" name="searchKeyword3" placeholder="출판사 입력"><br>
+		<label for="searchType3"></label>
+		<select id="searchType3" name="searchType3">
+			<option value="bpubl">출판사</option>
+			<option value="btitl">책 제목</option>
+			<option value="bwrit">지은이</option>
+			<option value="bsort">분류</option>
+		</select>
+		<input type="text" id="searchKeyword3" name="searchKeyword3" placeholder="출판사 입력"><br>
 
-			<label for="searchType4"></label>
-			<select id="searchType4" name="searchType4">
-				<option value="bsort">분류</option>			
-				<option value="btitl">책 제목</option>
-				<option value="bwrit">지은이</option>
-				<option value="bpubl">출판사</option>
-			</select>
-			<input type="text" id="searchKeyword4" name="searchKeyword4" placeholder="분류 입력"><br>
+		<label for="searchType4"></label>
+		<select id="searchType4" name="searchType4">
+			<option value="bsort">분류</option>
+			<option value="btitl">책 제목</option>
+			<option value="bwrit">지은이</option>
+			<option value="bpubl">출판사</option>
+		</select>
+		<input type="text" id="searchKeyword4" name="searchKeyword4" placeholder="분류 입력"><br>
 
-			<button type="submit">검색</button>
-		</form>
+		<br><button type="submit">검색</button>
+	</form>
 
 </div>
 </body>
